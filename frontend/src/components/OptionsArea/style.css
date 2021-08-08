@@ -1,0 +1,27 @@
+.options {
+    border-right: 1px solid var(--colorLine);
+    grid: options;
+}
+
+.options p {
+    padding: 15px;
+    font-weight: 500;
+}
+
+.options a {
+    padding: 15px;
+    align-items: center;
+    display: flex;
+    border-top: 1px solid var(--colorLine);
+    color: black;
+}
+
+.options a:hover {
+    background-color: #313131;
+    color: var(--colorPrimary);
+}
+
+.options a i{
+    font-size: 24px;
+    margin-right: 16px;
+}

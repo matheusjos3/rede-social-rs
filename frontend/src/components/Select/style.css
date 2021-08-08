@@ -1,0 +1,16 @@
+.select-block {
+    border: 1px solid #D9D9D9;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    
+    font-family: 'Sora', sans-serif;
+}
+
+.select-block select {
+    font-size: 16px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+}

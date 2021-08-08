@@ -1,0 +1,20 @@
+.following {
+    border-left: 1px solid var(--colorLine);
+    grid-area: following;
+}
+
+.following-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid var(--colorLine);
+}
+
+.following-top p {
+    font-weight: 800;
+}
+
+.following-list {
+    padding: 20px;
+}

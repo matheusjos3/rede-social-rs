@@ -1,0 +1,46 @@
+.user-mini-item {
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    padding: 15px;
+    min-height: 250px;
+    text-align: center;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+    overflow: hidden;
+
+}
+
+.user-mini-item h3 {
+    font-size: 1rem;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+}
+
+.user-mini-item p {
+    flex: 1;
+}
+
+.user-mini-item img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.user-mini-item a {
+    color: #FFF;
+    padding: 5px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: var(--colorPrimary);
+}
+
+/* .button-block {
+    margin-top: 30px;
+} */

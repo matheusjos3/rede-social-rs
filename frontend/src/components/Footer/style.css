@@ -1,0 +1,19 @@
+.content-footer {
+    grid-area: footer;
+}
+
+.content-footer footer {
+    display: flex;
+    padding: 10px;
+    color: #FFF;
+    background-color: var(--colorPrimary);
+}
+
+.links {
+    margin-left: auto;
+}
+
+.links a {
+    margin-right: 10px;
+    color: #FFF;
+}

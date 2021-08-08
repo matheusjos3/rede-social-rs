@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --colorPrimary: #f34e4e;
+    --colorHover: #EA493E;
+    --colorLine: #DFDFDF;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+textarea:focus {
+    outline-style: none;
+}
+
+input:focus {
+    outline-style: none;
+}
+
+::placeholder {
+    color: black;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: red;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: red;
+  }
+
+button:focus {
+    outline-style: none;
+}

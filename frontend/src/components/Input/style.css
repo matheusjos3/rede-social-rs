@@ -1,0 +1,8 @@
+.field-block input {
+    border: 1px solid #D9D9D9;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}

@@ -1,0 +1,86 @@
+.header {
+    grid-area: header;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: #FFF;
+    border-bottom: 1px solid var(--colorLine);
+    /* -webkit-box-shadow: -1px 1px 15px 5px rgba(0,0,0,0.34); 
+    box-shadow: -1px 1px 15px 5px rgba(0,0,0,0.34); */
+    z-index: 2;
+}
+
+.brand {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 32px;
+    color: #000;
+}
+
+.navbar-itens {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-area {
+    border-radius: 5px;
+    margin: 0px auto 0px auto;
+    background-color: #454545;
+    font-family: 'Sora', sans-serif;
+}
+
+.search-area form {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    color: #ffffff;
+}
+
+.search-area form i {
+    margin-right: 20px;
+}
+
+.search-area input {
+    background-color: transparent;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    color: #ffffff;
+}
+
+.search-area input::placeholder {
+    color: #ffffff;
+}
+
+.nav-links button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #454545;
+}
+
+.nav-links a{
+    color: #454545;
+}
+
+.nav-links a:hover{
+    color: var(--colorPrimary);
+    transition: 0.1s;
+}
+
+.nav-links button:hover{
+    color: var(--colorPrimary);
+    transition: 0.1s;
+}
+
+
+.ml {
+    margin-left: 1.3rem;
+}
+
+.exit-bg {
+    color: #FA5F55;
+}
