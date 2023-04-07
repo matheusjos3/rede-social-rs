@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import Search from './Pages/Search';
 
-import { isAuthenticated } from './services/auth';
 import Home from './Pages/Home'
 import Timeline from './Pages/Timeline'
+import Search from './Pages/Search';
 import Profile from './Pages/Profile';
 import Settings from './Pages/Settings';
+
+import { isAuthenticated } from './services/auth';
 
 function PrivateRoute({ component: Component, ...rest }) {
     return (
