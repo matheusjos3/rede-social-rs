@@ -22,9 +22,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
+    width: 90%;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 20px;
@@ -44,22 +44,19 @@
 .date .field-block:nth-child(2) {
     margin-left: 10px;
     margin-right: 10px;
-} 
+}
 
 /*--- END MODAL --- */
 
 .home-background {
-    background-image: url('../assets/background.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image: none;
     height: 100vh;
 }
 
 .home-content {
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.0);
     height: 100%;
 }
 
@@ -76,28 +73,18 @@
 
 .content {
     text-align: center;
-    color: #FFF;
+    color: #000;
     padding: 20px;
 }
 
 .content h1 {
     font-family: 'Bebas Neue', cursive;
     font-size: 64px;
-    margin-bottom: 50px;
+    margin-bottom: 32px;
 }
 
-.content form {
-    width: 350px;
-}
-
-.content form button {
-    margin-top: 30px;
-}
-
-.line {
-    background-color: #D9D9D9;
-    height: 1px;
-    margin: 30px 0px;
+.content p {
+    margin-top: 32px;
 }
 
 .content p button {
@@ -107,4 +94,43 @@
     font-weight: bold;
     background-color: transparent;
     color: var(--colorPrimary);
+}
+
+.content p button:hover {
+    color: var(--colorPrimaryDark);
+    transition: color 1.s ease-in;
+}
+
+@media (min-width: 1100px) {
+
+    /* Modal */
+    .modal-signup-content {
+        width: 400px;
+    }
+
+    .home-background {
+        background-image: url('../assets/background.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+
+    .home-content {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .content {
+        text-align: center;
+        color: #FFF;
+        padding: 0px;
+    }
+
+    .content h1 {
+        margin-bottom: 50px;
+    }
+
+    .content form {
+        width: 350px;
+    }
 }

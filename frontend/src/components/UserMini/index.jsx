@@ -9,7 +9,6 @@ function UserMini({id, name, url_avatar, location}) {
         <div className="user-mini-item">
             {url_avatar !== '' ? <img src={url_avatar} alt={name} /> : <img src={defaultImage} alt={name} />}
             <h3>{name}</h3>
-            <p>{location}</p>
             <a href={`/profile/${id}`}>Ver perfil</a>
         </div>
     )

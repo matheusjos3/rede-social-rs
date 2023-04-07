@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { X } from 'react-feather';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useHistory } from 'react-router-dom';
 
-import './Home.css'
-import Select from '../components/Select'
-import Input from '../components/Input';
-import Button from '../components/Button';
 import api from '../services/api';
+import Input from '../components/Input';
+import Select from '../components/Select'
+import Button from '../components/Button';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 
+import './Home.css'
 
 function Home() {
     const success = (msg) => toast.success(msg, { autoClose: 3000 });
     const error = (msg) => toast.error(msg, { autoClose: 3000 });
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isValidating, setIsValidating] = useState(true)
+    const [isValidatingSession, setIsValidatingSession] = useState(true)
+    const [isCreatingAccount, setIsCreatingAccount] = useState(false)
+    const [isValidatingLogin, setIsValidatingLogin] = useState(false)
+
+    const [emailLogin, setEmailLogin] = useState('');
+    const [passwordLogin, setPasswordLogin] = useState('');
+
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [day, setDay] = useState('');
@@ -26,16 +32,17 @@ function Home() {
     const [year, setYear] = useState('');
     const [genre, setGenre] = useState('');
     const [password, setPassword] = useState('');
+
     const history = useHistory();
 
     useEffect(() => {
         const json = localStorage.getItem('user_session')
         const user = JSON.parse(json)
 
-        if(user) {
+        if (user) {
             history.push("/timeline")
-        }else {
-            setIsValidating(false)
+        } else {
+            setIsValidatingSession(false)
         }
     }, [])
 
@@ -45,8 +52,10 @@ function Home() {
 
     async function signin(e) {
         e.preventDefault()
-        const data = { email, password }
 
+        const data = { email: emailLogin, password: passwordLogin }
+
+        setIsValidatingLogin(true)
         await api.post('/api/signin', data)
             .then(res => {
                 localStorage.removeItem('user_session')
@@ -54,26 +63,30 @@ function Home() {
                 history.push("/timeline")
             })
             .catch(err => error(err.response.data))
+        setIsValidatingLogin(false)
     }
 
     async function signup(e) {
         e.preventDefault()
+
         const date_birth = year + '-' + month + '-' + day
         const data = { email, name, date_birth, genre, password }
 
+        setIsCreatingAccount(true)
         await api.post('/api/signup', data)
             .then(_ => {
                 success("Agora é só fazer login :)");
                 setIsOpen(false)
             })
             .catch(err => error(err.response.data))
+        setIsCreatingAccount(false)
     }
 
     toast.configure()
 
     return (
         <>
-            {isValidating && <Loading />}
+            {isValidatingSession && <Loading />}
 
             <div className="modal-signup" style={{ display: show() }}>
                 <button className="btn-close">
@@ -82,7 +95,7 @@ function Home() {
                 <div className="modal-signup-content">
                     <h1>Rede Social</h1>
                     <form onSubmit={signup}>
-                        <Input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                        <Input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
                         <Input type="text" placeholder="Nome" value={name} onChange={e => setName(e.target.value)} />
                         <div className="date">
                             <Input type="text" placeholder="Dia" value={day} onChange={e => setDay(e.target.value)} />
@@ -91,12 +104,12 @@ function Home() {
                         </div>
                         <Select value={genre} onChange={e => setGenre(e.target.value)} />
                         <Input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} />
-                        <Button type="submit">Cadastrar</Button>
+                        <Button loading={isCreatingAccount} text={"Cadastrar"} type="submit" />
                     </form>
                 </div>
             </div>
 
-            {isValidating === false &&
+            {isValidatingSession === false &&
                 <div className="home-background">
                     <div className="home-content">
                         <div className="content-main">
@@ -104,11 +117,10 @@ function Home() {
                                 <div className="content">
                                     <h1>Rede Social</h1>
                                     <form onSubmit={signin}>
-                                        <Input placeholder="Email" type="text" value={email} onChange={e => setEmail(e.target.value)} />
-                                        <Input placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                                        <Button type="submit">Entrar</Button>
+                                        <Input placeholder="E-mail" type="email" value={emailLogin} onChange={e => setEmailLogin(e.target.value)} />
+                                        <Input placeholder="Senha" type="password" value={passwordLogin} onChange={e => setPasswordLogin(e.target.value)} />
+                                        <Button loading={isValidatingLogin} text={"Entrar"} type="submit" />
                                     </form>
-                                    <div className="line"></div>
                                     <p>Não tem uma conta? <button onClick={() => setIsOpen(true)} type="submit">Cadastre-se</button></p>
                                 </div>
                             </div>

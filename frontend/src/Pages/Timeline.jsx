@@ -1,10 +1,10 @@
 import React from 'react';
 
+import Header from '../components/Header';
+import OptionsArea from '../components/OptionsArea';
 import Feed from '../components/Feed';
 import FollowingArea from '../components/FollowingArea';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
-import OptionsArea from '../components/OptionsArea';
 
 import './Timeline.css'
 

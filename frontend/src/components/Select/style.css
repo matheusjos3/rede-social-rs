@@ -1,10 +1,9 @@
 .select-block {
     border: 1px solid #D9D9D9;
-    padding: 10px;
+    padding: 8px;
     font-size: 16px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    
+    border-radius: 4px;
+    margin-bottom: 16px;
     font-family: 'Sora', sans-serif;
 }
 
@@ -13,4 +12,9 @@
     width: 100%;
     background-color: transparent;
     border: none;
+}
+
+.select-block select::placeholder {
+    color: #515151;
+    opacity: 1;
 }

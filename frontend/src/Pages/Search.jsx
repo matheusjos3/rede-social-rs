@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import api from '../services/api';
 import FollowingArea from '../components/FollowingArea';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import OptionsArea from '../components/OptionsArea';
 import UserMini from '../components/UserMini';
-import api from '../services/api';
 
 import './Search.css'
 
@@ -17,12 +17,13 @@ function useQuery() {
 function Search() {
     const query = useQuery();
     const [users, setUsers] = useState([]);
+    const nome = query.get("name");
 
     useEffect(() => {
         async function getUsers() {
             const user_session = JSON.parse(localStorage.getItem('user_session'))
 
-            await api.get(`/api/search/${query.get("name")}`, {
+            await api.get(`/api/search/${nome}`, {
                 headers: {
                     Authorization: `bearer ${user_session.token}`
                 }
@@ -32,16 +33,16 @@ function Search() {
         }
 
         getUsers()
-    }, [query])
+    }, [nome] )
 
     return (
-        <div className="container">
+        <div className="container-search-page">
             <Header />
             <OptionsArea />
             <main>
                 <div className="search-title">
                     <p>Você pesquisou</p>
-                    <h1>{`"${query.get("name")}"`}</h1>
+                    <h1>{`"${nome}"`}</h1>
                 </div>
                 <div className="container-list-users">
                     {users.map(user => (

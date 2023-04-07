@@ -1,11 +1,19 @@
+.container main {
+    grid-area: main;
+} 
+
 .container {
     display: grid;
-	grid-template-columns: 300px auto 300px ;
-	grid-template-rows: auto 1fr auto;
-	grid-template-areas: "header header header" "options main following" "footer footer footer";
+	grid-template-rows: auto auto auto 1fr auto;
+	grid-template-columns: 1fr;
+	grid-template-areas: "header header" "options options" "following following" "main main" "footer footer";
 	height: 100vh;
 }
 
-.container main {
-    grid-area: main;
+@media (min-width: 1100px) {
+	.container {
+		grid-template-columns: 300px auto 300px ;
+		grid-template-rows: auto 1fr auto;
+		grid-template-areas: "header header header" "options main following" "footer footer footer";
+	}
 }

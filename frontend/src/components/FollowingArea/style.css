@@ -1,20 +1,40 @@
 .following {
     border-left: 1px solid var(--colorLine);
     grid-area: following;
+    border-bottom: 1px solid var(--colorLine);
 }
 
 .following-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid var(--colorLine);
+    padding: 16px 32px;
+    display: none;
 }
 
-.following-top p {
-    font-weight: 800;
+.following-list ul {
+    padding: 16px;
+    display: flex;
+    overflow-y: scroll;
 }
 
-.following-list {
-    padding: 20px;
+.following-list ul li+li {
+    margin-left: 24px;
+}
+
+@media (min-width: 1100px) {
+    .following-top {
+        display: flex;
+    }
+
+    .following-list ul {
+        flex-direction: column;
+        overflow-y: hidden;
+        padding: 16px 32px;
+    }
+
+    .following-list ul li+li {
+        margin-top: 16px;
+        margin-left: 0px;
+    }
 }

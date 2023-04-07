@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { parseISO, formatDistance } from 'date-fns'
-import { MoreHorizontal, Trash, Globe, EyeOff, Heart } from 'react-feather';
+import { MoreHorizontal, Trash, Globe, EyeOff, Heart, MessageCircle, Share2, Eye, ThumbsUp } from 'react-feather';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pt from 'date-fns/locale/pt'
@@ -92,37 +92,65 @@ function CardPost({ user_id, name, url_avatar, url_image, post_id, text, visible
                     <p>{distance}</p>
                 </div>
                 <div className="post-action">
-                    <div className="post-action-button">
+                    <div className="post-action-menu">
                         <button onClick={showMenu}>
                             <MoreHorizontal />
                         </button>
                         {user.id === user_id &&
                             <div style={{ display: show() }} className="post-action-item">
-                                <button onClick={() => del()}><Trash />Excluir post</button>
+                                <button onClick={() => del()}><Trash size={20} />Excluir publicação</button>
+                                <button><Eye size={20} />Alterar visibilidade</button>
                             </div>
                         }
                     </div>
+
                 </div>
             </div>
-            {url_image !== ""
-                ?
-                <div className="post-content-image">
-                    <img src={url_image} alt="" />
-                </div>
-                :
-                <div className="post-content-text">
-                    <p>{text}</p>
-                </div>
+            {text !== "" &&
+                (
+                    <div className="post-content-text">
+                        <p>{text}</p>
+                    </div>
+                )
             }
 
+            {url_image !== "" &&
+                (
+                    <div className="post-content-image">
+                        <img src={url_image} alt="" />
+                    </div>
+                )
+            }
+
+            <div className="post-details">
+                <div className='info-likes'>
+                    <div className='like-icon-rounded'>
+                        <ThumbsUp width="20" height="20" />
+                    </div>
+                    <span>{`${like} Curtida(s)`}</span>
+                </div>
+
+                <p>0 comentários</p>
+            </div>
+
             <div className="post-bottom">
-                <button onClick={() => likeHandler()}>
-                    {isLiked ?
-                        <span className="post-liked"><Heart width="32" height="32" /> <span>Curtido</span></span>
-                        :
-                        <span><Heart width="32" height="32" /> <span>Curtir</span></span>}
+                <button
+                    className={isLiked ? 'like-action-div post-action-button liked' : 'like-action-div post-action-button'}
+                    onClick={() => likeHandler()}
+                >
+                    <ThumbsUp width="24" height="24" />
+                    <span>{isLiked ? 'Curtido' : 'Curtir'}</span>
                 </button>
-                <p>{`${like} curtida(s)`}</p>
+
+                <button className='post-action-button'>
+                    <MessageCircle width="24" height="24" />
+                    <span>Comentar</span>
+                </button>
+
+                <button className='post-action-button'>
+                    <Share2 width="24" height="24" />
+                    <span>Compartilhar</span>
+                </button>
             </div>
 
         </article>

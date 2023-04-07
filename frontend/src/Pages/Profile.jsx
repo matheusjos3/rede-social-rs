@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Settings, UserCheck, UserPlus } from 'react-feather';
+import { Briefcase, Coffee, Home, Info, MapPin, Settings, User, UserCheck, UserPlus, Users, ZapOff } from 'react-feather';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import api from '../services/api';
+import { deletePost, getMyLikes } from '../services/PostService';
 import CardPost from '../components/CardPost';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import UserMini from '../components/UserMini';
-import api from '../services/api';
 import defaultImage from '../assets/default.jpg';
-import { deletePost, getMyLikes } from '../services/PostService';
 import './Profile.css'
 
 function Profile() {
@@ -19,6 +19,12 @@ function Profile() {
         LOADING: 'LOADING',
         FOLLOWING: 'FOLLOWING',
         FOLLOWERS: 'FOLLOWERS',
+    }
+
+    const genres = {
+        M: 'Masculino',
+        F: 'Feminino',
+        O: 'Outros'
     }
 
     const success = (msg) => toast.success(msg, { autoClose: 2000 });
@@ -30,7 +36,9 @@ function Profile() {
     const [followers, setFollowers] = useState([])
     const [screenState, setScreenState] = useState(screenStates.POSTS);
     const [myLikes, setMyLikes] = useState([])
+    const [isShowDetail, setIsShowDetail] = useState(false)
     const [list, setList] = useState([])
+
     const params = useParams();
     const user_session = JSON.parse(localStorage.getItem('user_session'))
     const isFollowing = list.map(l => l.id).includes(Number.parseInt(params.id))
@@ -42,6 +50,10 @@ function Profile() {
     useEffect(() => {
         fetchMyLikes()
     }, [])
+
+    function showDetailSection() {
+        setIsShowDetail(!isShowDetail)
+    }
 
     //USER
     useEffect(() => {
@@ -58,7 +70,7 @@ function Profile() {
         }
 
         getData()
-    }, [list])
+    }, [params])
 
     async function follow() {
         const data = { id_user: user_session.id, id_following: Number.parseInt(params.id) }
@@ -68,11 +80,11 @@ function Profile() {
                 Authorization: `bearer ${user_session.token}`
             }
         })
-            .then(_ => getYouFollowing())
+            .then(_ => loadFollowers())
             .catch(err => error(err.response.data))
     }
 
-    async function getYouFollowing() {
+    async function loadFollowers() {
         const user_session = JSON.parse(localStorage.getItem('user_session'))
         await api.get(`/api/user/${user_session.id}/following`, {
             headers: {
@@ -116,7 +128,7 @@ function Profile() {
         }
 
         getFollowing()
-    }, [list])
+    }, [params])
 
     //FOLLOWERS
     useEffect(() => {
@@ -134,9 +146,9 @@ function Profile() {
         getFollowers()
     }, [list])
 
-    //YOU FOLLOWING
+    // //MY FOLLOWING
     useEffect(() => {
-        async function getYouFollowing() {
+        async function getMyFollowing() {
             const user_session = JSON.parse(localStorage.getItem('user_session'))
             await api.get(`/api/user/${user_session.id}/following`, {
                 headers: {
@@ -144,8 +156,8 @@ function Profile() {
                 }
             }).then(res => setList(res.data))
         }
-        getYouFollowing()
-    }, [list])
+        getMyFollowing()
+    }, [params])
 
     async function onDelete(id_user, id_post) {
         deletePost(id_user, id_post)
@@ -167,7 +179,7 @@ function Profile() {
                         <div className="button-settings">
                             {(Number.parseInt(params.id)) === user_session.id &&
                                 <a href="/settings">
-                                    <Settings className="rotate" width="30" height="30" />
+                                    <Settings className="rotate" width="24" height="24" />
                                 </a>
                             }
                         </div>
@@ -191,60 +203,90 @@ function Profile() {
                                         }
                                     </button>
                                 }
-                                <div className="profile-stats-item">
-                                    <h2>{posts.length}</h2>
-                                    <p>Postagens</p>
-                                </div>
-                                <div className="profile-stats-item">
-                                    <h2>{following.length}</h2>
-                                    <p>Seguindo</p>
-                                </div>
-                                <div className="profile-stats-item">
-                                    <h2>{followers.length}</h2>
-                                    <p>Seguidores</p>
+                                <div className="stats">
+                                    <div className="profile-stats-item">
+                                        <h2>{posts.length}</h2>
+                                        <p>Postagens</p>
+                                    </div>
+                                    <div className="profile-stats-item stats-item-space">
+                                        <h2>{following.length}</h2>
+                                        <p>Seguindo</p>
+                                    </div>
+                                    <div className="profile-stats-item">
+                                        <h2>{followers.length}</h2>
+                                        <p>Seguidores</p>
+                                    </div>
                                 </div>
                             </div>
+
+                            <button className='button-open-detail-section' type='button' onClick={() => showDetailSection()}>
+                                <Info width="24" height="24" />
+                                {isShowDetail ? 'fechar detalhes' : 'ver detalhes'}
+                            </button>
                         </div>
                     </div>
                 </div>
+
                 <div className="profile-content-area">
-                    <div className="profile-l">
-                        <div className="profile-l-bar">
-                            <button className={screenState === 'POSTS' && 'is-selected'} onClick={() => setScreenState(screenStates.POSTS)}>Publicação</button>
-                            <button className={screenState === 'FOLLOWING' && 'is-selected'} onClick={() => setScreenState(screenStates.FOLLOWING)}>Seguindo</button>
-                            <button className={screenState === 'FOLLOWERS' && 'is-selected'} onClick={() => setScreenState(screenStates.FOLLOWERS)}>Seguidores</button>
-                        </div>
-                        <div className="profile-content">
-                            {screenState === 'FOLLOWING' &&
-                                <div className="profile-content-list">
-                                    {following.map(user => (
-                                        <UserMini
-                                            key={user.id}
-                                            id={user.id}
-                                            name={user.name}
-                                            url_avatar={user.url_avatar}
-                                            location={user.location}
-                                        />
-                                    ))}
-                                </div>
-                            }
 
-                            {screenState === 'FOLLOWERS' &&
-                                <div className="profile-content-list">
-                                    {followers.map(user => (
-                                        <UserMini
-                                            key={user.id}
-                                            id={user.id}
-                                            name={user.name}
-                                            url_avatar={user.url_avatar}
-                                            location={user.location}
-                                        />
-                                    ))}
-                                </div>
-                            }
 
-                            {screenState === 'POSTS' &&
-                                <div className="profile-content-post">
+
+                    <div className="profile-content-sections">
+
+                        <section className={isShowDetail ? 'active' : ''}>
+                            <div className="profile-detail-section">
+                                <h3>Biografia</h3>
+                                <div className="bio-detail">
+                                    {profile.bio !== ''
+                                        ?
+                                        <p>{profile.bio}</p>
+                                        :
+                                        <p>Sem biografia</p>
+                                    }
+                                </div>
+                                <h3>Detalhes</h3>
+                                <div className='profile-detail-item'>
+                                    <MapPin className='detail-icon' width="20" height="20" />
+                                    {profile.location !== ''
+                                        ?
+                                        <p>De {profile.location}</p>
+                                        :
+                                        <p>Cidade natal</p>
+                                    }
+                                </div>
+                                <div className='profile-detail-item'>
+                                    <Home className='detail-icon' width="20" height="20" />
+                                    {profile.location !== ''
+                                        ?
+                                        <p>Mora em {profile.location}</p>
+                                        :
+                                        <p>Cidade atual</p>
+                                    }
+                                </div>
+                                <div className='profile-detail-item'>
+                                    <Briefcase className='detail-icon' width="20" height="20" />
+                                    <p>Profissão atual</p>
+                                </div>
+                                <div className='profile-detail-item'>
+                                    <User className='detail-icon' width="20" height="20" />
+                                    <p>{genres[profile.genre] !== undefined ? genres[profile.genre] : 'Genêro'}</p>
+                                </div>
+                                <div className='profile-detail-item'>
+                                    <Coffee className='detail-icon' width="20" height="20" />
+                                    <p>Gosta de café</p>
+                                </div>
+                            </div>
+
+                        </section>
+
+                        <section>
+                            <div className="profile-options-items">
+                                <button className={screenState === 'POSTS' ? 'is-selected' : ''} onClick={() => setScreenState(screenStates.POSTS)}>Publicação</button>
+                                <button className={screenState === 'FOLLOWING' ? 'is-selected' : ''} onClick={() => setScreenState(screenStates.FOLLOWING)}>Seguindo</button>
+                                <button className={screenState === 'FOLLOWERS' ? 'is-selected' : ''} onClick={() => setScreenState(screenStates.FOLLOWERS)}>Seguidores</button>
+                            </div>
+                            {screenState === 'POSTS' && posts.length > 0 &&
+                                <div className="profile-list-posts">
                                     {posts.map(p => (
                                         <CardPost
                                             key={p.post_id}
@@ -261,30 +303,56 @@ function Profile() {
                                     ))}
                                 </div>
                             }
-                        </div>
-                    </div>
 
-                    <div className="profile-r">
-                        <div className="profile-r-title">
-                            <p>Sobre</p>
-                        </div>
-                        <div className="profile-r-item">
-                            {profile.bio !== ''
-                                ?
-                                <h3>{profile.location}</h3>
-                                :
-                                <h3>Planeta Terra</h3>
+                            {screenState === 'POSTS' && posts.length === 0 &&
+                                <div className='section-empty'>
+                                    <h1><ZapOff width="30" height="30" /> Sem atividade</h1>
+                                    <p>{`${profile.name} não tem postagens ainda.`}</p>
+                                </div>
                             }
 
-                        </div>
-                        <div className="profile-r-item">
-                            {profile.bio !== ''
-                                ?
-                                <p>{profile.bio}</p>
-                                :
-                                <p>Sem Bio</p>
+                            {screenState === 'FOLLOWING' && following.length > 0 &&
+                                <div className="profile-list-users">
+                                    {following.map(user => (
+                                        <UserMini
+                                            key={user.id}
+                                            id={user.id}
+                                            name={user.name}
+                                            url_avatar={user.url_avatar}
+                                            location={user.location}
+                                        />
+                                    ))}
+                                </div>
                             }
-                        </div>
+
+                            {screenState === 'FOLLOWING' && following.length === 0 &&
+                                <div className='section-empty'>
+                                    <h1><Users width="30" height="30" /> Sem atividade</h1>
+                                    <p>{`${profile.name} não segue ninguém ainda.`}</p>
+                                </div>
+                            }
+
+                            {screenState === 'FOLLOWERS' && followers.length > 0 &&
+                                <div className="profile-list-users">
+                                    {followers.map(user => (
+                                        <UserMini
+                                            key={user.id}
+                                            id={user.id}
+                                            name={user.name}
+                                            url_avatar={user.url_avatar}
+                                            location={user.location}
+                                        />
+                                    ))}
+                                </div>
+                            }
+
+                            {screenState === 'FOLLOWERS' && followers.length === 0 &&
+                                <div className='section-empty'>
+                                    <h1><Users width="30" height="30" /> Sem atividade</h1>
+                                    <p>{`${profile.name} não tem seguidores ainda.`}</p>
+                                </div>
+                            }
+                        </section>
                     </div>
                 </div>
             </main>

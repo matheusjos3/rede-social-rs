@@ -6,21 +6,20 @@ import './style.css';
 function OptionsArea() {
     return (
         <aside className="options">
-            <p>Opções</p>
             <a href="/" className="options-item">
-                <i><Home className="options-item-icon"/></i> Home
+                <i><Home className="options-item-icon" /></i> <span>Home</span>
             </a>
             <a href="/" className="options-item">
-                <i><Zap className="options-item-icon" /></i> Tendencias
+                <i><Zap className="options-item-icon" /></i> <span>Tendencias</span>
             </a>
             <a href="/" className="options-item">
-                <i><Users className="options-item-icon" /></i> Procurar amigos
+                <i><Users className="options-item-icon" /></i> <span>Procurar amigos</span>
             </a>
             <a href="/" className="options-item">
-                <i><MapPin className="options-item-icon" /></i> Lugares
+                <i><MapPin className="options-item-icon" /></i> <span>Lugares</span>
             </a>
             <a href="/" className="options-item">
-                <i><Film className="options-item-icon" /></i> Watch
+                <i><Film className="options-item-icon" /></i> <span>Watch</span>
             </a>
         </aside>
     )

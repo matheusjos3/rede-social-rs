@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Lock, X } from 'react-feather';
+import { Info, Lock, X } from 'react-feather';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
@@ -42,6 +42,7 @@ function Settings() {
                 }
             })
                 .then(res => {
+                    console.log(res.data)
                     setDateBirth(res.data.date_birth)
                     setName(res.data.name)
                     setBio(res.data.bio)
@@ -135,7 +136,7 @@ function Settings() {
                                 <Input type="text" value={month} placeholder="Mês" onChange={e => setMonth(e.target.value)} />
                                 <Input type="text" value={year} placeholder="Ano" onChange={e => setYear(e.target.value)} />
                             </div>
-                            <Select onChange={e => setGenre(e.target.value)} />
+                            <Select value={genre} onChange={e => setGenre(e.target.value)} />
                             <Input value={location} type="text" placeholder="Localização" onChange={e => setLocation(e.target.value)} />
                             <button className="settings-item-button" type="submit" color="">Atualizar</button>
                         </form>
@@ -150,7 +151,10 @@ function Settings() {
                             <Input value={password} type="password" placeholder="Senha atual" onChange={e => setPassword(e.target.value)} />
                             <Input value={new_password} type="password" placeholder="Nova senha" onChange={e => setNewPassword(e.target.value)} />
                             <button className="settings-item-button" type="submit" color="">Alterar</button>
-                            <p>Necessario logar novamente</p>
+                            <span>
+                                <Info width={24} height={24} />
+                                <p>Necessário entrar novamente</p>
+                            </span>
                         </form>
                     </div>
 
@@ -162,7 +166,7 @@ function Settings() {
                         </div>
                         <form onSubmit={deleteAccount}>
                             <Input value={password_delete} type="password" placeholder="Senha" onChange={e => setPasswordDelete(e.target.value)} />
-                            <button className="settings-item-button btn-danger" type="submit" color="">Exluir</button>
+                            <button className="settings-item-button btn-danger" type="submit" color="">Excluir</button>
                         </form>
                     </div>
                 </div>

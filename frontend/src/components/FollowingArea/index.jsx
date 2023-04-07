@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Users } from 'react-feather';
-import UserItem from '../UserItem';
+import { MoreHorizontal } from 'react-feather';
 
-import './style.css';
 import api from '../../services/api';
+import UserItem from '../UserItem';
+import './style.css';
 
 function FollowingArea() {
     const [following, setFollowing] = useState([])
@@ -24,8 +24,8 @@ function FollowingArea() {
     return (
         <aside className="following">
             <div className="following-top">
-                <p>Você segue</p>
-                <Users />
+                <h1>Seguindo</h1>
+                <MoreHorizontal />
             </div>
             <div className="following-list">
                 <ul>

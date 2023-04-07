@@ -1,157 +1,244 @@
-@keyframes modal-fade{
+@keyframes fadeIn {
     from {
         opacity: 0;
-    }to{
+    }
+
+    to {
         opacity: 1;
     }
 }
 
-.modal-upload-image {
+/* Novo modal */
+.modal-fade {
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.80);
-    animation: modal-fade 0.5s;
-    z-index: 10000;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.90);
+    animation: fadeIn 0.5s;
+    z-index: 20;
 }
 
-.modal-upload-image-content {
-    display: flex;
-    position:fixed;
+.modal-upload-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     background: white;
-    width: 500px;
-    height: 500px;
-    border-radius: 5px;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
+    width: 90%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    padding: 16px;
+    border-radius: 8px;
 }
 
-.modal-upload-image-options {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    right: 0;
-    margin: 10px 10px;
-}
-
-.modal-upload-image-options button {
+.modal-title {
     display: flex;
     align-items: center;
-    font-size: 20px;
-    padding: 10px;
-    margin-bottom: 5px;
-    color: #FFF;
-    height: 40px;
-    background-color: var(--colorPrimary);
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
 }
 
-.modal-upload-image-content img {
+.modal-title h1 {
+    flex: 1;
+}
+
+.modal-title button {
+    border: 2px solid black;
+    background-color: transparent;
+    font-weight: 700;
+    display: flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.modal-title button:hover {
+    color: var(--colorPrimary);
+    border: 2px solid var(--colorPrimary);
+}
+
+.modal-image-preview {
+    margin-top: 16px;
+    height: 300px;
+}
+
+.modal-image-preview img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
+    object-fit: contain;
 }
 
-.modal-upload-image-url {
-    position: fixed;
-    display: flex;
-    bottom: 0;
-    width:100%;
-    background-color: #4B4B4B;
-}
-
-.input-icon {
-    padding: 5px;
-    background-color: #1D1D1D;
-    color: #616161;
-    padding: 15px;
-    margin-right: 20px;
-}
-
-.modal-upload-image-url input {
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    color: #DDDDDD;
-    font-size: 16px;
-}
-
-.modal-upload-image-url input::placeholder {
-    color: #B2B1B1;
-}
-
-
-.feed {
-    background-color: #F2F2F2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 53px 24px 24px 24px;
-}
-
-.create-area {
-    border: 1px solid var(--colorLine);
-    border-radius: 5px;
-    margin-bottom: 50px;
-    max-width: 500px;
-    width: 100%;
-    background-color: #FFF;
-}
-
-.create-area-top {
-    text-align: center;
-    padding: 16px;
-    border-bottom: 1px solid var(--colorLine);
-}
-
-.create-area-top p {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 18px;
-    color: #454545;
-}
-
-.create-area-text textarea {
-    border: none;
-    width: 100%;
-    padding: 1.3rem 1.3rem 0.6rem 1.3rem;
-    resize: vertical;
-    font-size: 18px;
-    border-bottom: 1px solid var(--colorLine);
-}
-
-.create-area-bottom {
+.empty-preview {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0px 0px 5px 5px;
-    padding: 10px;
+    flex-direction: column;
+    color: var(--placeholderColor);
+    height: 100%;
 }
 
-.create-area-bottom p {
-    margin-left: 5px;
-    margin-right: 27px;
+.empty-preview img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 8px;
 }
 
-.create-area-bottom button {
+.input-url {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 12px;
+    border: 1px solid var(--colorLine);
+    border-radius: 8px;
+    color: var(--placeholderColor);
+}
+
+.input-url input {
     border: none;
-    cursor: pointer;
     background-color: transparent;
+    font-size: 16px;
+    width: 100%;
 }
 
-.create-area-bottom button:nth-child(4){
-    color: white;
+.input-url input::placeholder {
+    color: var(--placeholderColor);
+}
+
+/* Fim novo modal */
+
+.feed {
+    background-color: #F3F3F3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 16px 16px;
+    height: 100%;
+}
+
+.create-post-area {
+    border: 1px solid var(--colorLine);
+    padding: 16px;
+    margin-bottom: 50px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: white;
+    max-width: 500px;
+}
+
+.create-post-top h1 {
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.create-post-area textarea {
+    border: none;
+    width: 100%;
+    height: 84px;
+    margin-top: 16px;
+    resize: vertical;
     font-size: 16px;
-    padding: 5px;
-    width: 100px;
+}
+
+.create-post-area textarea::placeholder {
+    color: var(--placeholderColor);
+}
+
+.post-image-preview {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.post-image-preview img {
+    width: 100%;
+    height: 300px;
+}
+
+.post-image-preview button {
+    background-color: transparent;
+    text-decoration: underline;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.post-image-preview button:hover {
+    color: var(--colorPrimary);
+}
+
+.create-post-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.create-post-options button {
+    border: 2px solid black;
+    background-color: transparent;
+    padding: 8px;
+    font-weight: 700;
+    width: 110px;
+    display: flex;
+    height: 36px;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.create-post-options button.add-image {
+    border: 2px solid var(--colorPrimary);
+    color: var(--colorPrimary);
+    width: 40px;
+}
+
+.button-create-post {
+    background-color: var(--colorPrimary);
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
     text-transform: uppercase;
-    border-radius: 5px;
-    background-color: #f34e4e;
-    margin-left: auto;
+    color: white;
+    margin-top: 32px;
+}
+
+.empty-posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-posts h2, .empty-posts span {
+    color: var(--titleColor);
+}
+
+.empty-posts p {
+    color: var(--placeholderColor);
+}
+
+@media (min-width: 1100px) {
+    .feed {
+        padding: 53px 24px 24px 24px;
+    }
+
+    .modal-upload-container {
+        width: 500px;
+    }
 }

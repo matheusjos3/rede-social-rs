@@ -1,24 +1,23 @@
 .post {
     border: 1px solid var(--colorLine);
-    border-radius: 5px;
-
+    border-radius: 8px;
     max-width: 500px;
-
     width: 100%;
     margin-bottom: 20px;
     background-color: #FFF;
-
     display: flex;
     flex-direction: column;
+    padding: 15px;
 
 }
 
 .post-top {
     border-bottom: 1px solid var(--colorLine);
-    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 .post-avatar {
@@ -47,7 +46,7 @@
 
 .post-info-name a {
     font-size: 24px;
-    color: black;
+    color: var(--titleColor);
     font-weight: bold;
     margin-right: 5px;
 }
@@ -62,50 +61,55 @@
     font-size: 14px;
 }
 
-.post-action-button {
+.post-action-menu {
     position: relative;
-}
-
-.post-action-button button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
 }
 
 .post-action-item {
     position: absolute;
-    right: 0px;
-    min-width: 150px;
-    text-align: right;
+    right: -10px;
+    width: 200px;
     background-color: #f8f8f8;
-    border: 1px solid rgb(190, 190, 190);
+    border: 1px solid var(--colorLine);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
-.post-action-item button{
+.post-action-menu button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--menuHorizontalColor);
+}
+
+.post-action-item button {
     color: #474747;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     transition: 0.5s;
     cursor: pointer;
     font-size: 16px;
 }
 
-.post-action-item button:hover{
-    color: #b32f2f;
-    background-color: #f77676;
+.post-action-item button~button {
+    border-top: 1px solid var(--colorLine);
+}
+
+.post-action-item button:hover {
+    color: #000000;
     cursor: pointer;
+    background-color: #f1f1f1;
 }
 
 .post-content-image {
     flex: 1;
     max-height: 450px;
-
-    background: rgb(217,217,217);
-    background: linear-gradient(0deg, rgba(217,217,217,1) 0%, rgba(255,255,255,1) 100%); 
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .post-content-image img {
@@ -115,25 +119,71 @@
 }
 
 .post-content-text {
+    text-align: justify;
+}
+
+.post-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    margin-top: 32px;
+    border-bottom: 1px solid var(--colorLine);
+}
+
+.info-likes {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: justify;
-    min-height: 250px;
-    padding: 25px;
-    font-size: 18px;
-    background: rgb(243,78,78);
-    background: linear-gradient(90deg, rgba(243,78,78,1) 0%, rgba(243,211,78,1) 100%); 
-    color: white;
-    flex: 1;
 }
+
+.info-likes span {
+    margin-left: 8px;
+    font-size: 14px;
+    color: var(--placeholderColor);
+}
+
+.like-icon-rounded {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--colorPrimary);
+    color: white;
+}
+
+.post-details p {
+    font-size: 14px;
+    text-decoration: underline;
+    color: var(--placeholderColor);
+    cursor: pointer;
+}
+
 
 .post-bottom {
     display: flex;
-    border-top: 1px solid var(--colorLine);
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    gap: 21px;
+    margin-top: 16px;
+}
+
+.post-action-button {
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.post-action-button.liked {
+    color: var(--colorPrimary);
+}
+
+.post-action-button span {
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .post-bottom button {
@@ -144,15 +194,6 @@
     cursor: pointer;
 }
 
-.post-bottom button span {
-    display: flex;
-    align-items: center;
-}
-
-.post-bottom button span > span{
-    margin-left: 10px;
-}
-
 .post-liked {
     color: var(--colorPrimary);
 }
@@ -160,4 +201,10 @@
 .post-bottom p {
     color: #7C7979;
     font-size: 18px;
+}
+
+@media (min-width: 1100px) {
+    .post-action-button span {
+        display: block;
+    }
 }
