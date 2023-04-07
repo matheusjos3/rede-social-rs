@@ -103,7 +103,7 @@ module.exports = {
         const id = req.params.id;
 
         const user = await connection('user')
-            .select('id', 'name', 'date_birth', 'url_avatar', 'bio', 'url_banner', 'location', 'created_at')
+            .select('id', 'name', 'date_birth', 'url_avatar', 'bio', 'url_banner', 'genre', 'location', 'created_at')
             .where('id', id)
             .whereNull('deleted_at')
             .first()
@@ -127,7 +127,7 @@ module.exports = {
 
             const [year, month, day] = user.date_birth.split('-')
 
-            res.status(200).json({ ...user, following, followers, myBirthday: { year, month, day } })
+            return res.status(200).json({ ...user, following, followers, myBirthday: { year, month, day } })
         }
 
         return res.status(400).send()
