@@ -30,6 +30,10 @@ Fiz esse projeto para colocar em pratica meus conhecimentos em HTML, CSS e JavaS
 - Personalizar perfil
 
 ---
+##  ⚡ Demonstração
+Ver o Frontend do projeto aqui 👉🏽 https://redesocial-web-deploy.vercel.app/
+
+---
 
 <a id="tecnologias"></a>
 
@@ -94,23 +98,20 @@ por fim..
 <a id="screenshot"></a>
 
 ## 💻 Capturas de tela
-Tela inicial
+<h3>Tela inicial</h3>
 <img src="./assets/homepage.png">
 
-Formulario de cadastro
+<h3>Formulário de cadastro</h3>
 <img src="./assets/homepage2.png">
 
-Timeline
+<h3>Timeline</h3>
 <img src="./assets/timeline.png">
 
-Tela de pesquisa
+<h3>Tela de pesquisa</h3>
 <img src="./assets/pesquisa.png">
 
-Tela de perfil
+<h3>Tela de perfil</h3>
 <img src="./assets/perfil.png">
-
-Tela de perfil (Publicações)
-<img src="./assets/perfil2.png">
 
 ---
 <h3 align="center">Desenvolvido com ❤ por Matheus José</h3>
