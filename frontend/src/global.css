@@ -6,9 +6,16 @@
 }
 
 :root {
-    --colorPrimary: #f34e4e;
-    --colorHover: #EA493E;
-    --colorLine: #DFDFDF;
+    --colorPrimary: #FF554A;
+    --colorPrimaryDark: #e24e44;
+    --colorLine: #E7E1E1;
+    --placeholderColor: #7c7c7c;
+    --inputBorderColor: #D6D6D6;
+    --inputSearchBackgroundColor: #969696;
+    --titleColor: #232323;
+    --menuHorizontalColor: #7c7c7c;
+    --colorTitle: #979797;
+    --colorSubTitle: #979797;
 }
 
 a {
@@ -29,16 +36,9 @@ input:focus {
 
 ::placeholder {
     color: black;
-    opacity: 1; /* Firefox */
-  }
-  
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: red;
-  }
-  
-  ::-ms-input-placeholder { /* Microsoft Edge */
-   color: red;
-  }
+    opacity: 1;
+    /* Firefox */
+}
 
 button:focus {
     outline-style: none;
